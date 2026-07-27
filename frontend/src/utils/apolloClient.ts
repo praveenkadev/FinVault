@@ -1,0 +1,27 @@
+import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+import { store } from '../store';
+
+const httpLink = createHttpLink({
+  uri: import.meta.env.VITE_GRAPHQL_URL || '/graphql',
+  credentials: 'include',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = store.getState().auth.accessToken;
+  return {
+    headers: { ...headers, ...(token ? { authorization: `Bearer ${token}` } : {}) },
+  };
+});
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) graphQLErrors.forEach(({ message }) => console.error('[GraphQL]', message));
+  if (networkError) console.error('[Network]', networkError);
+});
+
+export const apolloClient = new ApolloClient({
+  link: from([errorLink, authLink, httpLink]),
+  cache: new InMemoryCache(),
+  defaultOptions: { watchQuery: { fetchPolicy: 'network-only' } },
+});

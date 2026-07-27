@@ -1,0 +1,24 @@
+2026-07-03 11:46:09 [[31merror[39m]: Error: querySrv ENOTFOUND _mongodb._tcp.1998
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:295:17)
+2026-07-03 11:51:16 [[31merror[39m]: Error: querySrv EBADNAME _mongodb._tcp.1998>
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:295:17)
+2026-07-03 11:52:27 [[31merror[39m]: Error: querySrv EBADNAME _mongodb._tcp.1998">
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:295:17)
+2026-07-03 11:56:23 [[31merror[39m]: Error: querySrv EBADNAME _mongodb._tcp.1998"
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:295:17)
+2026-07-03 12:01:26 [[31merror[39m]: Error: querySrv ENOTFOUND _mongodb._tcp.1998
+    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:295:17)
+2026-07-03 12:01:49 [[31merror[39m]: MongoServerError: bad auth : authentication failed
+    at Connection.sendCommand (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\connection.ts:559:17)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at Connection.command (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\connection.ts:633:22)
+    at continueScramConversation (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\auth\scram.ts:187:13)
+    at executeScram (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\auth\scram.ts:114:3)
+    at ScramSHA1.auth (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\auth\scram.ts:60:12)
+    at performInitialHandshake (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\connect.ts:164:7)
+    at connect (C:\Praveen\finvault\finvault\backend\node_modules\mongodb\src\cmap\connect.ts:43:5)
+2026-07-26 16:03:34 [[31merror[39m]: Error: Connection terminated due to connection timeout
+    at C:\Praveen\finvault\backend\node_modules\pg-pool\index.js:45:11
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at connectPostgres (C:\Praveen\finvault\backend\src\config\database.ts:18:18)
+    at bootstrap (C:\Praveen\finvault\backend\src\index.ts:69:5)
