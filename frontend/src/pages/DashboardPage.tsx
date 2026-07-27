@@ -129,7 +129,7 @@ console.log('txns from selector:', txns);
 
    useEffect(() => {
     const token = store.getState().auth.accessToken;
-    fetch('/api/accounts', {
+    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4000/api'}/accounts`, {
     headers: { Authorization: `Bearer ${token}` }})
     .then(r => r.json())
     .then(d => { if (d.data) setAccounts(d.data); })

@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-const api = axios.create({ baseURL: '/api', withCredentials: true });
+const api = axios.create({ 
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api', 
+  withCredentials: true 
+});
 const initialState: any = { user: null, accessToken: null, isAuthenticated: false, isLoading: false, error: null };
 export const loginThunk = createAsyncThunk('auth/login', async (credentials: any, { rejectWithValue }) => {
   try { const { data } = await api.post('/auth/login', credentials); return data; }
