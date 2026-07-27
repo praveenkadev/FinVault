@@ -18,11 +18,14 @@ export const fetchTransactions = createAsyncThunk(
   async (params: any = {}, { getState }) => {
     const token = getToken(getState as () => any);
     console.log('Fetching transactions with token:', token ? 'EXISTS' : 'MISSING');
-    const { data } = await axios.get(`${import.meta.env.VITE_API_URL || 'https://finvault-backend-pf4e.onrender.com/api/transactions', {      
-      params,
-      headers: { Authorization: `Bearer ${token}` },
-      withCredentials: true,
-    });
+    const { data } = await axios.get(
+      'https://finvault-backend-pf4e.onrender.com/api/transactions',
+      {      
+        params,
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      }
+    );
     console.log(data);
     return data;
   }
