@@ -114,3 +114,14 @@
 2026-07-26 17:18:42 [[32minfo[39m]: 🚀 FinVault backend running on http://localhost:4000
 2026-07-26 17:18:42 [[32minfo[39m]: 📊 GraphQL Playground: http://localhost:4000/graphql
 2026-07-26 17:18:56 [[32minfo[39m]: User logged in: praveenamballa329@gmail.com
+2026-07-26 19:55:44 [[32minfo[39m]: ✅ PostgreSQL connected
+2026-07-26 19:55:44 [[32minfo[39m]: ✅ MongoDB connected
+2026-07-26 19:57:30 [[33mwarn[39m]: KafkaJSNonRetriableError
+  Caused by: KafkaJSConnectionError: Connection error: 
+    at Socket.onError (C:\Praveen\finvault\backend\node_modules\kafkajs\src\network\connection.js:210:23)
+    at Socket.emit (node:events:509:28)
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2026-07-26 19:57:31 [[32minfo[39m]: 🚀 FinVault backend running on http://localhost:4000
+2026-07-26 19:57:31 [[32minfo[39m]: 📊 GraphQL Playground: http://localhost:4000/graphql

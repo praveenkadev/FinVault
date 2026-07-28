@@ -36,8 +36,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // ── Auth rate limiter (stricter) ──────────────────────────
-const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 });
-app.use('/api/auth', authLimiter);
+const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 50 });app.use('/api/auth', authLimiter);
 
 // ── REST Routes ───────────────────────────────────────────
 app.use('/api/auth', authRoutes);
