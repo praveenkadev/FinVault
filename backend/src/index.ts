@@ -69,12 +69,10 @@ const bootstrap = async () => {
     await connectMongoDB();
 
     // Kafka is optional (may not be available in local dev without Docker)
-    try {
-      await initKafkaProducer();
-      await initKafkaConsumer();
-    } catch (kafkaErr) {
-      logger.warn('Kafka unavailable — transaction events will not be streamed', kafkaErr);
-    }
+   // Kafka is optional — don't await, just fire and forget
+  initKafkaProducer()
+    .then(() => initKafkaConsumer())
+    .catch(() => logger.warn('Kafka unavailable — running without event streaming'));
 
     // GraphQL
     await setupGraphQL(app);
