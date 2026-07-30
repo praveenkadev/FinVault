@@ -136,6 +136,15 @@ console.log('txns from selector:', txns);
     .catch(() => {});
     }, []);
 
+    
+    useEffect(() => {
+      window.history.pushState(null, '', window.location.href);
+      window.onpopstate = () => {
+      window.history.pushState(null, '', window.location.href);
+    };
+    return () => { window.onpopstate = null; };
+    }, []);
+
   const { data, loading } = useQuery(PORTFOLIO_QUERY, {
     variables: { userId: user?.id },
     skip: !user?.id,
@@ -143,7 +152,10 @@ console.log('txns from selector:', txns);
 
   useEffect(() => {  console.log('Transactions in store:', txns); dispatch(fetchTransactions({ limit: 20 })); }, [dispatch]);
 
-  const handleLogout = () => { dispatch(logoutThunk()); navigate('/login'); };
+  const handleLogout = async () => {
+    await dispatch(logoutThunk());
+    window.location.href = '/login';
+  };
 
   const handleTx = async (e: React.FormEvent) => {
     e.preventDefault();
