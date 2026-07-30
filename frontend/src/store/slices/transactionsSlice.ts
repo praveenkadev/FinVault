@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+
 const initialState: any = { 
   items: [], 
   pagination: null, 
@@ -8,7 +10,6 @@ const initialState: any = {
   error: null 
 };
 
-// Helper to get token from Redux state
 const getToken = (getState: () => any): string => {
   return getState().auth.accessToken || '';
 };
@@ -18,15 +19,11 @@ export const fetchTransactions = createAsyncThunk(
   async (params: any = {}, { getState }) => {
     const token = getToken(getState as () => any);
     console.log('Fetching transactions with token:', token ? 'EXISTS' : 'MISSING');
-    const { data } = await axios.get(
-      'https://finvault-backend-pf4e.onrender.com/api/transactions',
-      {      
-        params,
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      }
-    );
-    console.log(data);
+    const { data } = await axios.get(`${BASE_URL}/transactions`, {      
+      params,
+      headers: { Authorization: `Bearer ${token}` },
+      withCredentials: true,
+    });
     return data;
   }
 );
@@ -36,12 +33,14 @@ export const createTransaction = createAsyncThunk(
   async (payload: any, { getState, rejectWithValue }) => {
     try {
       const token = getToken(getState as () => any);
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:4000/api'}/transactions`,
+      const { data } = await axios.post(
+        `${BASE_URL}/transactions`,
         payload, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return data.data;
     } catch (err: any) {
+      console.error('Transaction error:', err.response?.data);
       return rejectWithValue(err.response?.data?.error || 'Failed');
     }
   }

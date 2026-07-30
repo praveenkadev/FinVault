@@ -85,8 +85,8 @@ export const AuthPage: React.FC = () => {
   const fillDemo = (role: 'admin' | 'user') => {
     setForm((f) => ({
       ...f,
-      email: role === 'admin' ? 'admin@finvault.io' : 'user@finvault.io',
-      password: role === 'admin' ? 'Admin@123' : 'User@123',
+      email: role === 'admin' ? 'praveenkadev@gmail.com' : 'praveenamballa329@gmail.com',
+      password: role === 'admin' ? 'Praveen@1998' : 'Praveen@1998',
     }));
     setMode('login');
   };
@@ -119,13 +119,13 @@ export const AuthPage: React.FC = () => {
             <div>
               Admin<span style={styles.roleTag}>RBAC</span> ·{' '}
               <button onClick={() => fillDemo('admin')} style={{ background: 'none', border: 'none', color: '#58A6FF', cursor: 'pointer', fontSize: '0.78rem', padding: 0 }}>
-                admin@finvault.io / Admin@123
+                praveenkadev@gmail.com / Praveen@1998
               </button>
             </div>
             <div>
               User ·{' '}
               <button onClick={() => fillDemo('user')} style={{ background: 'none', border: 'none', color: '#58A6FF', cursor: 'pointer', fontSize: '0.78rem', padding: 0 }}>
-                user@finvault.io / User@123
+                praveenamballa329@gmail.com / Praveen@1998
               </button>
             </div>
           </div>

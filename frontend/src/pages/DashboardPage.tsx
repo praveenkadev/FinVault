@@ -127,35 +127,40 @@ console.log('txns from selector:', txns);
 
   const [accounts, setAccounts] = useState<any[]>([]);
 
-   useEffect(() => {
+  // Back button fix
+  useEffect(() => {
+    window.history.pushState(null, '', '/dashboard');
+    window.onpopstate = () => {
+      window.history.pushState(null, '', '/dashboard');
+    };
+    return () => { window.onpopstate = null; };
+  }, []);
+
+  // Fetch accounts for dropdown
+  useEffect(() => {
     const token = store.getState().auth.accessToken;
-    fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:4000/api'}/accounts`, {
-    headers: { Authorization: `Bearer ${token}` }})
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+    fetch(`${baseUrl}/accounts`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
     .then(r => r.json())
     .then(d => { if (d.data) setAccounts(d.data); })
     .catch(() => {});
-    }, []);
-
-    
-    useEffect(() => {
-      window.history.pushState(null, '', window.location.href);
-      window.onpopstate = () => {
-      window.history.pushState(null, '', window.location.href);
-    };
-    return () => { window.onpopstate = null; };
-    }, []);
-
+  }, []);
+  
   const { data, loading } = useQuery(PORTFOLIO_QUERY, {
     variables: { userId: user?.id },
     skip: !user?.id,
   });
 
   useEffect(() => {  console.log('Transactions in store:', txns); dispatch(fetchTransactions({ limit: 20 })); }, [dispatch]);
+  
 
   const handleLogout = async () => {
-    await dispatch(logoutThunk());
-    window.location.href = '/login';
-  };
+  await dispatch(logoutThunk());
+  sessionStorage.clear();
+  window.location.replace('/login');
+};
 
   const handleTx = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 const api = axios.create({ 
-  baseURL: 'https://finvault-backend-pf4e.onrender.com/api', 
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api', 
   withCredentials: true 
 });
 const initialState: any = { user: null, accessToken: null, isAuthenticated: false, isLoading: false, error: null };
