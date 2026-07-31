@@ -1,9 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_API_URL 
+  || (window.location.hostname === 'localhost' 
+      ? 'http://localhost:4000/api'
+      : 'https://finvault-backend-pf4e.onrender.com/api');
+
+console.log('🔗 API URL:', BASE_URL);
+
 const api = axios.create({ 
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api', 
-  withCredentials: true 
+  baseURL: BASE_URL,
+  withCredentials: true,
+  timeout: 60000,
 });
+
 const initialState: any = { user: null, accessToken: null, isAuthenticated: false, isLoading: false, error: null };
 export const loginThunk = createAsyncThunk('auth/login', async (credentials: any, { rejectWithValue }) => {
   try { const { data } = await api.post('/auth/login', credentials); return data; }
